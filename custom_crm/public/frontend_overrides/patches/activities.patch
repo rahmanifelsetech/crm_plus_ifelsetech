@@ -1,0 +1,53 @@
+diff --git a/frontend/src/components/Activities/Activities.vue b/frontend/src/components/Activities/Activities.vue
+index 80d5fef3..c354e005 100644
+--- a/frontend/src/components/Activities/Activities.vue
++++ b/frontend/src/components/Activities/Activities.vue
+@@ -105,6 +105,15 @@
+           @reload="all_activities.reload() && scroll()"
+         />
+       </div>
++      <div
++        v-else-if="title == 'Quotations'"
++        class="px-3 pb-3 sm:px-10 sm:pb-5"
++      >
++        <QuotationArea
++          :quotations="activities"
++          @reload="quotations.reload() && scroll()"
++        />
++      </div>
+       <div
+         v-else
+         v-for="(activity, i) in activities"
+@@ -455,6 +464,7 @@ import CallArea from '@/components/Activities/CallArea.vue'
+ import NoteArea from '@/components/Activities/NoteArea.vue'
+ import TaskArea from '@/components/Activities/TaskArea.vue'
+ import AttachmentArea from '@/components/Activities/AttachmentArea.vue'
++import QuotationArea from '@/components/Activities/QuotationArea.vue'
+ import DataFields from '@/components/Activities/DataFields.vue'
+ import UserAvatar from '@/components/UserAvatar.vue'
+ import ActivityIcon from '@/components/Icons/ActivityIcon.vue'
+@@ -570,6 +580,14 @@ const whatsappMessages = createResource({
+   onSuccess: () => nextTick(() => scroll()),
+ })
+ 
++const quotations = createResource({
++  url: 'crm.fcrm.doctype.crm_quotation.api.get_quotations_for_deal',
++  params: { deal_name: props.docname },
++  cache: ['quotations', props.docname],
++  auto: props.doctype === 'CRM Deal',
++  onSuccess: () => nextTick(() => scroll()),
++})
++
+ onBeforeUnmount(() => {
+   $socket.off('whatsapp_message')
+ })
+@@ -643,6 +661,9 @@ const activities = computed(() => {
+   } else if (title.value == 'Attachments') {
+     if (!all_activities.data?.attachments) return []
+     return sortByModified(all_activities.data.attachments)
++  } else if (title.value == 'Quotations') {
++    if (!quotations.data) return []
++    return quotations.data
+   }
+ 
+   _activities.forEach((activity) => {

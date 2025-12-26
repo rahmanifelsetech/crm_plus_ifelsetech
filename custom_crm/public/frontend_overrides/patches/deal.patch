@@ -1,0 +1,24 @@
+diff --git a/frontend/src/pages/Deal.vue b/frontend/src/pages/Deal.vue
+index 0a2d292c..efe2f63b 100644
+--- a/frontend/src/pages/Deal.vue
++++ b/frontend/src/pages/Deal.vue
+@@ -349,6 +349,7 @@ import LinkIcon from '@/components/Icons/LinkIcon.vue'
+ import ArrowUpRightIcon from '@/components/Icons/ArrowUpRightIcon.vue'
+ import SuccessIcon from '@/components/Icons/SuccessIcon.vue'
+ import AttachmentIcon from '@/components/Icons/AttachmentIcon.vue'
++import FileTextIcon from '@/components/Icons/FileTextIcon.vue'
+ import LayoutHeader from '@/components/LayoutHeader.vue'
+ import Activities from '@/components/Activities/Activities.vue'
+ import OrganizationModal from '@/components/Modals/OrganizationModal.vue'
+@@ -577,6 +578,11 @@ const tabs = computed(() => {
+       label: __('Attachments'),
+       icon: AttachmentIcon,
+     },
++    {
++      name: 'Quotations',
++      label: __('Quotations'),
++      icon: FileTextIcon,
++    },
+     {
+       name: 'WhatsApp',
+       label: __('WhatsApp'),

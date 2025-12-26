@@ -1,0 +1,43 @@
+diff --git a/frontend/src/components/FilesUploader/filesUploaderHandler.ts b/frontend/src/components/FilesUploader/filesUploaderHandler.ts
+index ae25f6aa..ac963122 100644
+--- a/frontend/src/components/FilesUploader/filesUploaderHandler.ts
++++ b/frontend/src/components/FilesUploader/filesUploaderHandler.ts
+@@ -6,6 +6,8 @@ interface UploadOptions {
+   doctype?: string
+   docname?: string
+   type?: string
++  description?: string
++  category?: string
+ }
+ 
+ type EventListenerOption = 'start' | 'progress' | 'finish' | 'error'
+@@ -90,7 +92,13 @@ class FilesUploadHandler {
+         }
+       }
+ 
+-      xhr.open('POST', '/api/method/upload_file', true)
++      // Use custom upload endpoint if description or category is provided
++      const useCustomEndpoint = options.description || options.category
++      const uploadUrl = useCustomEndpoint
++        ? '/api/method/crm.api.upload.upload_file_with_metadata'
++        : '/api/method/upload_file'
++
++      xhr.open('POST', uploadUrl, true)
+       xhr.setRequestHeader('Accept', 'application/json')
+ 
+       if (window.csrf_token && window.csrf_token !== '{{ csrf_token }}') {
+@@ -121,6 +129,14 @@ class FilesUploadHandler {
+         formData.append('type', options.type)
+       }
+ 
++      if (options.description) {
++        formData.append('file_description', options.description)
++      }
++
++      if (options.category) {
++        formData.append('file_category', options.category)
++      }
++
+       xhr.send(formData)
+     })
+   }

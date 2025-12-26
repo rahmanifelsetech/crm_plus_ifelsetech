@@ -1,14 +1,14 @@
 app_name = "custom_crm"
-app_title = "custom_crm"
+app_title = "Custom CRM Extensions"
 app_publisher = "pythona@gmail.com"
-app_description = "crm"
+app_description = "Custom extensions and customizations for Frappe CRM"
 app_email = "pythona@gmail.com"
 app_license = "mit"
 
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["crm"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -79,11 +79,22 @@ app_license = "mit"
 # 	"filters": "custom_crm.utils.jinja_filters"
 # }
 
+# Fixtures
+# --------
+fixtures = [
+	{
+		"dt": "Custom Field",
+		"filters": [
+			["dt", "in", ["File"]]
+		]
+	}
+]
+
 # Installation
 # ------------
 
 # before_install = "custom_crm.install.before_install"
-# after_install = "custom_crm.install.after_install"
+after_install = "custom_crm.install.after_install"
 
 # Uninstallation
 # ------------

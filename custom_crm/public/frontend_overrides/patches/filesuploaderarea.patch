@@ -1,0 +1,129 @@
+diff --git a/frontend/src/components/FilesUploader/FilesUploaderArea.vue b/frontend/src/components/FilesUploader/FilesUploaderArea.vue
+index d78d0846..13521742 100644
+--- a/frontend/src/components/FilesUploader/FilesUploaderArea.vue
++++ b/frontend/src/components/FilesUploader/FilesUploaderArea.vue
+@@ -75,13 +75,61 @@
+             />
+             <component v-else class="size-4" :is="fileIcon(file.type)" />
+           </div>
+-          <div class="flex flex-col gap-1 text-sm text-ink-gray-5 truncate">
++          <div class="flex flex-col gap-2 text-sm text-ink-gray-5 w-full pr-4">
+             <div class="text-base text-ink-gray-8 truncate">
+               {{ file.name }}
+             </div>
+             <div class="mb-1">
+               {{ convertSize(file.fileObj.size) }}
+             </div>
++            <FormControl
++              v-model="file.description"
++              type="textarea"
++              class="[&>textarea]:text-sm"
++              :placeholder="__('Add description (optional)')"
++              :rows="2"
++            />
++            <div class="flex flex-col gap-1">
++              <label class="text-xs text-ink-gray-6">{{ __('Categories') }}</label>
++              <div class="flex flex-wrap gap-1 p-2 border border-outline-gray-2 rounded bg-surface-gray-2 min-h-[2.5rem]">
++                <span
++                  v-for="(tag, idx) in file.selectedCategories"
++                  :key="idx"
++                  class="inline-flex items-center gap-1 px-2 py-0.5 text-xs bg-surface-blue text-ink-blue-8 rounded"
++                >
++                  {{ tag }}
++                  <button
++                    @click="removeCategory(file, idx)"
++                    class="hover:text-ink-blue-10"
++                  >
++                    ×
++                  </button>
++                </span>
++                <input
++                  v-model="file.categoryInput"
++                  @keydown.enter.prevent="addCategory(file)"
++                  @keydown.comma.prevent="addCategory(file)"
++                  type="text"
++                  class="flex-1 min-w-[100px] bg-transparent border-0 outline-none text-sm"
++                  :placeholder="file.selectedCategories.length ? '' : __('Type and press Enter to add categories...')"
++                />
++              </div>
++              <div class="flex flex-wrap gap-1 mt-1">
++                <button
++                  v-for="option in categoryOptions"
++                  :key="option"
++                  @click="toggleCategory(file, option)"
++                  :class="[
++                    'px-2 py-0.5 text-xs rounded border transition-colors',
++                    file.selectedCategories.includes(option)
++                      ? 'bg-surface-blue text-ink-blue-8 border-outline-blue'
++                      : 'bg-surface-gray-3 text-ink-gray-7 border-outline-gray-3 hover:bg-surface-gray-4'
++                  ]"
++                >
++                  {{ option }}
++                </button>
++              </div>
++            </div>
+             <FormControl
+               v-model="file.private"
+               type="checkbox"
+@@ -166,6 +214,21 @@ const allowTakePhoto = ref(
+ const restrictions = ref(props.options.restrictions || {})
+ const makeAttachmentsPublic = ref(props.options.makeAttachmentsPublic || false)
+ 
++const categoryOptions = [
++  'General',
++  'Contract',
++  'Invoice',
++  'Proposal',
++  'Presentation',
++  'Report',
++  'Image',
++  'Video',
++  'Audio',
++  'Document',
++  'Spreadsheet',
++  'Other',
++]
++
+ onMounted(() => {
+   createResource({
+     url: 'crm.api.get_file_uploader_defaults',
+@@ -285,6 +348,10 @@ function addFiles(fileArray) {
+         errorMessage: null,
+         uploading: false,
+         private: !makeAttachmentsPublic.value,
++        description: '',
++        category: 'General',
++        selectedCategories: [],
++        categoryInput: '',
+       }
+     })
+ 
+@@ -369,6 +436,28 @@ function removeFile(name) {
+   files.value = files.value.filter((file) => file.name !== name)
+ }
+ 
++function addCategory(file) {
++  if (!file.categoryInput || !file.categoryInput.trim()) return
++  const category = file.categoryInput.trim()
++  if (!file.selectedCategories.includes(category)) {
++    file.selectedCategories.push(category)
++  }
++  file.categoryInput = ''
++}
++
++function removeCategory(file, index) {
++  file.selectedCategories.splice(index, 1)
++}
++
++function toggleCategory(file, category) {
++  const index = file.selectedCategories.indexOf(category)
++  if (index > -1) {
++    file.selectedCategories.splice(index, 1)
++  } else {
++    file.selectedCategories.push(category)
++  }
++}
++
+ function fileIcon(type) {
+   if (type?.startsWith('audio')) {
+     return FileAudioIcon

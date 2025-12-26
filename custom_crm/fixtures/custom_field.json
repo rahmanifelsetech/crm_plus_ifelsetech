@@ -1,0 +1,32 @@
+[
+ {
+  "doctype": "Custom Field",
+  "name": "File-file_description",
+  "dt": "File",
+  "fieldname": "file_description",
+  "fieldtype": "Text",
+  "label": "Description",
+  "insert_after": "file_url",
+  "translatable": 0,
+  "allow_on_submit": 0,
+  "read_only": 0,
+  "hidden": 0,
+  "mandatory_depends_on": "",
+  "description": "Add a description for this file"
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "File-file_category",
+  "dt": "File",
+  "fieldname": "file_category",
+  "fieldtype": "Small Text",
+  "label": "Categories",
+  "insert_after": "file_description",
+  "translatable": 0,
+  "allow_on_submit": 0,
+  "read_only": 0,
+  "hidden": 0,
+  "options": "",
+  "description": "Select multiple categories for this file (comma-separated tags)"
+ }
+]
