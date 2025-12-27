@@ -1,4 +1,4 @@
-app_name = "custom_crm"
+app_name = "crm_plus_ifelsetech"
 app_title = "Custom CRM Extensions"
 app_publisher = "pythona@gmail.com"
 app_description = "Custom extensions and customizations for Frappe CRM"
@@ -13,11 +13,11 @@ required_apps = ["crm"]
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
-# 		"name": "custom_crm",
-# 		"logo": "/assets/custom_crm/logo.png",
-# 		"title": "custom_crm",
-# 		"route": "/custom_crm",
-# 		"has_permission": "custom_crm.api.permission.has_app_permission"
+# 		"name": "crm_plus_ifelsetech",
+# 		"logo": "/assets/crm_plus_ifelsetech/logo.png",
+# 		"title": "crm_plus_ifelsetech",
+# 		"route": "/crm_plus_ifelsetech",
+# 		"has_permission": "crm_plus_ifelsetech.api.permission.has_app_permission"
 # 	}
 # ]
 
@@ -25,15 +25,15 @@ required_apps = ["crm"]
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/custom_crm/css/custom_crm.css"
-# app_include_js = "/assets/custom_crm/js/custom_crm.js"
+# app_include_css = "/assets/crm_plus_ifelsetech/css/crm_plus_ifelsetech.css"
+# app_include_js = "/assets/crm_plus_ifelsetech/js/crm_plus_ifelsetech.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/custom_crm/css/custom_crm.css"
-# web_include_js = "/assets/custom_crm/js/custom_crm.js"
+# web_include_css = "/assets/crm_plus_ifelsetech/css/crm_plus_ifelsetech.css"
+# web_include_js = "/assets/crm_plus_ifelsetech/js/crm_plus_ifelsetech.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "custom_crm/public/scss/website"
+# website_theme_scss = "crm_plus_ifelsetech/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -51,7 +51,7 @@ required_apps = ["crm"]
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "custom_crm/public/icons.svg"
+# app_include_icons = "crm_plus_ifelsetech/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -75,8 +75,8 @@ required_apps = ["crm"]
 
 # add methods and filters to jinja environment
 # jinja = {
-# 	"methods": "custom_crm.utils.jinja_methods",
-# 	"filters": "custom_crm.utils.jinja_filters"
+# 	"methods": "crm_plus_ifelsetech.utils.jinja_methods",
+# 	"filters": "crm_plus_ifelsetech.utils.jinja_filters"
 # }
 
 # Fixtures
@@ -93,36 +93,36 @@ fixtures = [
 # Installation
 # ------------
 
-# before_install = "custom_crm.install.before_install"
-after_install = "custom_crm.install.after_install"
+# before_install = "crm_plus_ifelsetech.install.before_install"
+after_install = "crm_plus_ifelsetech.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "custom_crm.uninstall.before_uninstall"
-# after_uninstall = "custom_crm.uninstall.after_uninstall"
+# before_uninstall = "crm_plus_ifelsetech.uninstall.before_uninstall"
+# after_uninstall = "crm_plus_ifelsetech.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "custom_crm.utils.before_app_install"
-# after_app_install = "custom_crm.utils.after_app_install"
+# before_app_install = "crm_plus_ifelsetech.utils.before_app_install"
+# after_app_install = "crm_plus_ifelsetech.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "custom_crm.utils.before_app_uninstall"
-# after_app_uninstall = "custom_crm.utils.after_app_uninstall"
+# before_app_uninstall = "crm_plus_ifelsetech.utils.before_app_uninstall"
+# after_app_uninstall = "crm_plus_ifelsetech.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "custom_crm.notifications.get_notification_config"
+# notification_config = "crm_plus_ifelsetech.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -161,39 +161,39 @@ after_install = "custom_crm.install.after_install"
 
 # scheduler_events = {
 # 	"all": [
-# 		"custom_crm.tasks.all"
+# 		"crm_plus_ifelsetech.tasks.all"
 # 	],
 # 	"daily": [
-# 		"custom_crm.tasks.daily"
+# 		"crm_plus_ifelsetech.tasks.daily"
 # 	],
 # 	"hourly": [
-# 		"custom_crm.tasks.hourly"
+# 		"crm_plus_ifelsetech.tasks.hourly"
 # 	],
 # 	"weekly": [
-# 		"custom_crm.tasks.weekly"
+# 		"crm_plus_ifelsetech.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"custom_crm.tasks.monthly"
+# 		"crm_plus_ifelsetech.tasks.monthly"
 # 	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "custom_crm.install.before_tests"
+# before_tests = "crm_plus_ifelsetech.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "custom_crm.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "crm_plus_ifelsetech.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-# 	"Task": "custom_crm.task.get_dashboard_data"
+# 	"Task": "crm_plus_ifelsetech.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -207,13 +207,13 @@ after_install = "custom_crm.install.after_install"
 
 # Request Events
 # ----------------
-# before_request = ["custom_crm.utils.before_request"]
-# after_request = ["custom_crm.utils.after_request"]
+# before_request = ["crm_plus_ifelsetech.utils.before_request"]
+# after_request = ["crm_plus_ifelsetech.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["custom_crm.utils.before_job"]
-# after_job = ["custom_crm.utils.after_job"]
+# before_job = ["crm_plus_ifelsetech.utils.before_job"]
+# after_job = ["crm_plus_ifelsetech.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -243,7 +243,7 @@ after_install = "custom_crm.install.after_install"
 # --------------------------------
 
 # auth_hooks = [
-# 	"custom_crm.auth.validate"
+# 	"crm_plus_ifelsetech.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.

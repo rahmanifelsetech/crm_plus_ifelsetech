@@ -4,7 +4,7 @@ from frappe import _
 
 def after_install():
 	"""
-	Called after custom_crm app is installed.
+	Called after crm_plus_ifelsetech app is installed.
 	Apply custom field fixtures and frontend overrides.
 	"""
 	print("\n" + "="*60)
@@ -36,7 +36,7 @@ def import_custom_fields():
 	"""Import custom fields from fixtures"""
 	from frappe.core.doctype.data_import.data_import import import_file
 
-	fixtures_path = frappe.get_app_path("custom_crm", "fixtures")
+	fixtures_path = frappe.get_app_path("crm_plus_ifelsetech", "fixtures")
 	custom_field_file = fixtures_path + "/custom_field.json"
 
 	if frappe.os.path.exists(custom_field_file):
@@ -60,7 +60,7 @@ def import_custom_fields():
 
 def apply_frontend_overrides():
 	"""Apply frontend file overrides to CRM app"""
-	from custom_crm.apply_frontend_overrides import apply_frontend_overrides as apply_overrides
+	from crm_plus_ifelsetech.apply_frontend_overrides import apply_frontend_overrides as apply_overrides
 
 	print("\n🔧 Applying frontend overrides...")
 	success = apply_overrides()

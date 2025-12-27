@@ -1,5 +1,5 @@
 [project]
-name = "custom_crm"
+name = "crm_plus_ifelsetech"
 authors = [
     { name = "pythona@gmail.com", email = "pythona@gmail.com"}
 ]

@@ -95,7 +95,7 @@ class FilesUploadHandler {
       // Use custom upload endpoint if description or category is provided
       const useCustomEndpoint = options.description || options.category
       const uploadUrl = useCustomEndpoint
-        ? '/api/method/custom_crm.api.upload.upload_file_with_metadata'
+        ? '/api/method/crm_plus_ifelsetech.api.upload.upload_file_with_metadata'
         : '/api/method/upload_file'
 
       xhr.open('POST', uploadUrl, true)

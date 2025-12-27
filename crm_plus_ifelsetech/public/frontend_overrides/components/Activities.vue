@@ -556,7 +556,7 @@ const changeTabTo = (tabName) => {
 }
 
 const all_activities = createResource({
-  url: 'custom_crm.api.activities.get_activities',
+  url: 'crm_plus_ifelsetech.api.activities.get_activities',
   params: { name: props.docname },
   cache: ['activity', props.docname],
   auto: true,
