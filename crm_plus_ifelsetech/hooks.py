@@ -26,7 +26,7 @@ required_apps = ["crm"]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/crm_plus_ifelsetech/css/crm_plus_ifelsetech.css"
-# app_include_js = "/assets/crm_plus_ifelsetech/js/crm_plus_ifelsetech.js"
+# app_include_js = "/assets/crm_plus_ifelsetech/js/crm_extensions.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/crm_plus_ifelsetech/css/crm_plus_ifelsetech.css"
@@ -43,7 +43,7 @@ required_apps = ["crm"]
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"CRM Deal" : "public/js/crm_deal.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -85,7 +85,7 @@ fixtures = [
 	{
 		"dt": "Custom Field",
 		"filters": [
-			["dt", "in", ["File"]]
+			["dt", "in", ["File", "User", "Event", "Project"]]
 		]
 	}
 ]

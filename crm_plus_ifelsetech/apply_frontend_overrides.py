@@ -35,6 +35,11 @@ def apply_frontend_overrides():
 		"FilesUploader.vue": "components/FilesUploader/FilesUploader.vue",
 		"FilesUploaderArea.vue": "components/FilesUploader/FilesUploaderArea.vue",
 		"filesUploaderHandler.ts": "components/FilesUploader/filesUploaderHandler.ts",
+		"Activities/ProjectArea.vue": "components/Activities/ProjectArea.vue",
+		"Activities/EventArea.vue": "components/Activities/EventArea.vue",
+		"Activities/EventModal.vue": "components/Activities/EventModal.vue",
+		"CreateProjectModal.vue": "components/CreateProjectModal.vue",
+		"UserStatusDropdown.vue": "components/UserStatusDropdown.vue",
 	}
 
 	print("\n🔧 Applying custom CRM frontend overrides...\n")

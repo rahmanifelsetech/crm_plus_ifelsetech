@@ -115,6 +115,26 @@
         />
       </div>
       <div
+        v-else-if="title == 'Events'"
+        class="px-3 pb-3 sm:px-10 sm:pb-5"
+      >
+        <EventArea
+          :events="activities"
+          :deal-name="docname"
+          @reload="events.reload() && scroll()"
+        />
+      </div>
+      <div
+        v-else-if="title == 'Projects'"
+        class="px-3 pb-3 sm:px-10 sm:pb-5"
+      >
+        <ProjectArea
+          :projects="activities"
+          :deal-name="docname"
+          @reload="projects.reload() && scroll()"
+        />
+      </div>
+      <div
         v-else
         v-for="(activity, i) in activities"
         class="activity px-3 sm:px-10"
@@ -465,6 +485,8 @@ import NoteArea from '@/components/Activities/NoteArea.vue'
 import TaskArea from '@/components/Activities/TaskArea.vue'
 import AttachmentArea from '@/components/Activities/AttachmentArea.vue'
 import QuotationArea from '@/components/Activities/QuotationArea.vue'
+import EventArea from '@/components/Activities/EventArea.vue'
+import ProjectArea from '@/components/Activities/ProjectArea.vue'
 import DataFields from '@/components/Activities/DataFields.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import ActivityIcon from '@/components/Icons/ActivityIcon.vue'
@@ -588,6 +610,22 @@ const quotations = createResource({
   onSuccess: () => nextTick(() => scroll()),
 })
 
+const events = createResource({
+  url: 'crm_plus_ifelsetech.api.events.get_events_for_deal',
+  params: { deal_name: props.docname },
+  cache: ['events', props.docname],
+  auto: props.doctype === 'CRM Deal',
+  onSuccess: () => nextTick(() => scroll()),
+})
+
+const projects = createResource({
+  url: 'crm_plus_ifelsetech.api.project.get_projects_for_deal',
+  params: { deal_name: props.docname },
+  cache: ['projects', props.docname],
+  auto: props.doctype === 'CRM Deal',
+  onSuccess: () => nextTick(() => scroll()),
+})
+
 onBeforeUnmount(() => {
   $socket.off('whatsapp_message')
 })
@@ -664,6 +702,12 @@ const activities = computed(() => {
   } else if (title.value == 'Quotations') {
     if (!quotations.data) return []
     return quotations.data
+  } else if (title.value == 'Events') {
+    if (!events.data) return []
+    return events.data
+  } else if (title.value == 'Projects') {
+    if (!projects.data) return []
+    return projects.data
   }
 
   _activities.forEach((activity) => {
