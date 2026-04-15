@@ -350,6 +350,8 @@ import ArrowUpRightIcon from '@/components/Icons/ArrowUpRightIcon.vue'
 import SuccessIcon from '@/components/Icons/SuccessIcon.vue'
 import AttachmentIcon from '@/components/Icons/AttachmentIcon.vue'
 import FileTextIcon from '@/components/Icons/FileTextIcon.vue'
+import CalendarIcon from '@/components/Icons/CalendarIcon.vue'
+import ListIcon from '@/components/Icons/ListIcon.vue'
 import LayoutHeader from '@/components/LayoutHeader.vue'
 import Activities from '@/components/Activities/Activities.vue'
 import OrganizationModal from '@/components/Modals/OrganizationModal.vue'
@@ -582,6 +584,16 @@ const tabs = computed(() => {
       name: 'Quotations',
       label: __('Quotations'),
       icon: FileTextIcon,
+    },
+    {
+      name: 'Events',
+      label: __('Events'),
+      icon: CalendarIcon,
+    },
+    {
+      name: 'Projects',
+      label: __('Projects'),
+      icon: ListIcon,
     },
     {
       name: 'WhatsApp',
