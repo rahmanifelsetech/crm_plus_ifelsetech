@@ -28,17 +28,13 @@ def apply_frontend_overrides():
 
 	# File mappings: source -> destination
 	file_mappings = {
-		"QuotationArea.vue": "components/Activities/QuotationArea.vue",
+		# "QuotationArea.vue": "components/Activities/QuotationArea.vue",
 		"Activities.vue": "components/Activities/Activities.vue",
 		"AttachmentArea.vue": "components/Activities/AttachmentArea.vue",
 		"Deal.vue": "pages/Deal.vue",
 		"FilesUploader.vue": "components/FilesUploader/FilesUploader.vue",
 		"FilesUploaderArea.vue": "components/FilesUploader/FilesUploaderArea.vue",
 		"filesUploaderHandler.ts": "components/FilesUploader/filesUploaderHandler.ts",
-		"Activities/ProjectArea.vue": "components/Activities/ProjectArea.vue",
-		"Activities/EventArea.vue": "components/Activities/EventArea.vue",
-		"Activities/EventModal.vue": "components/Activities/EventModal.vue",
-		"CreateProjectModal.vue": "components/CreateProjectModal.vue",
 		"UserStatusDropdown.vue": "components/UserStatusDropdown.vue",
 	}
 

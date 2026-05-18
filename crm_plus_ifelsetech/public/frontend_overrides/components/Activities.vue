@@ -18,6 +18,9 @@
       <LoadingIndicator class="h-6 w-6" />
       <span>{{ __('Loading...') }}</span>
     </div>
+    <div v-else-if="title == 'Events'" class="h-full activity">
+      <EventArea :doctype="doctype" :docname="docname" />
+    </div>
     <div
       v-else-if="
         activities?.length ||
@@ -103,35 +106,6 @@
         <AttachmentArea
           :attachments="activities"
           @reload="all_activities.reload() && scroll()"
-        />
-      </div>
-      <div
-        v-else-if="title == 'Quotations'"
-        class="px-3 pb-3 sm:px-10 sm:pb-5"
-      >
-        <QuotationArea
-          :quotations="activities"
-          @reload="quotations.reload() && scroll()"
-        />
-      </div>
-      <div
-        v-else-if="title == 'Events'"
-        class="px-3 pb-3 sm:px-10 sm:pb-5"
-      >
-        <EventArea
-          :events="activities"
-          :deal-name="docname"
-          @reload="events.reload() && scroll()"
-        />
-      </div>
-      <div
-        v-else-if="title == 'Projects'"
-        class="px-3 pb-3 sm:px-10 sm:pb-5"
-      >
-        <ProjectArea
-          :projects="activities"
-          :deal-name="docname"
-          @reload="projects.reload() && scroll()"
         />
       </div>
       <div
@@ -484,9 +458,6 @@ import CallArea from '@/components/Activities/CallArea.vue'
 import NoteArea from '@/components/Activities/NoteArea.vue'
 import TaskArea from '@/components/Activities/TaskArea.vue'
 import AttachmentArea from '@/components/Activities/AttachmentArea.vue'
-import QuotationArea from '@/components/Activities/QuotationArea.vue'
-import EventArea from '@/components/Activities/EventArea.vue'
-import ProjectArea from '@/components/Activities/ProjectArea.vue'
 import DataFields from '@/components/Activities/DataFields.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import ActivityIcon from '@/components/Icons/ActivityIcon.vue'
@@ -497,6 +468,7 @@ import NoteIcon from '@/components/Icons/NoteIcon.vue'
 import TaskIcon from '@/components/Icons/TaskIcon.vue'
 import AttachmentIcon from '@/components/Icons/AttachmentIcon.vue'
 import WhatsAppIcon from '@/components/Icons/WhatsAppIcon.vue'
+import EventArea from '@/components/Activities/EventArea.vue'
 import WhatsAppArea from '@/components/Activities/WhatsAppArea.vue'
 import WhatsAppBox from '@/components/Activities/WhatsAppBox.vue'
 import LoadingIndicator from '@/components/Icons/LoadingIndicator.vue'
@@ -602,30 +574,6 @@ const whatsappMessages = createResource({
   onSuccess: () => nextTick(() => scroll()),
 })
 
-const quotations = createResource({
-  url: 'crm.fcrm.doctype.crm_quotation.api.get_quotations_for_deal',
-  params: { deal_name: props.docname },
-  cache: ['quotations', props.docname],
-  auto: props.doctype === 'CRM Deal',
-  onSuccess: () => nextTick(() => scroll()),
-})
-
-const events = createResource({
-  url: 'crm_plus_ifelsetech.api.events.get_events_for_deal',
-  params: { deal_name: props.docname },
-  cache: ['events', props.docname],
-  auto: props.doctype === 'CRM Deal',
-  onSuccess: () => nextTick(() => scroll()),
-})
-
-const projects = createResource({
-  url: 'crm_plus_ifelsetech.api.project.get_projects_for_deal',
-  params: { deal_name: props.docname },
-  cache: ['projects', props.docname],
-  auto: props.doctype === 'CRM Deal',
-  onSuccess: () => nextTick(() => scroll()),
-})
-
 onBeforeUnmount(() => {
   $socket.off('whatsapp_message')
 })
@@ -699,16 +647,7 @@ const activities = computed(() => {
   } else if (title.value == 'Attachments') {
     if (!all_activities.data?.attachments) return []
     return sortByModified(all_activities.data.attachments)
-  } else if (title.value == 'Quotations') {
-    if (!quotations.data) return []
-    return quotations.data
-  } else if (title.value == 'Events') {
-    if (!events.data) return []
-    return events.data
-  } else if (title.value == 'Projects') {
-    if (!projects.data) return []
-    return projects.data
-  }
+  } 
 
   _activities.forEach((activity) => {
     activity.icon = timelineIcon(activity.activity_type, activity.is_lead)
@@ -816,6 +755,9 @@ function timelineIcon(activity_type, is_lead) {
     case 'comment':
       icon = CommentIcon
       break
+    case 'event':
+      icon = CalendarIcon
+      break  
     case 'incoming_call':
       icon = InboundCallIcon
       break
@@ -845,7 +787,7 @@ watch([reload, reload_email], ([reload_value, reload_email_value]) => {
 })
 
 function scroll(hash) {
-  if (['tasks', 'notes'].includes(route.hash?.slice(1))) return
+  if (['tasks', 'notes', 'events'].includes(route.hash?.slice(1))) return
   setTimeout(() => {
     let el
     if (!hash) {
